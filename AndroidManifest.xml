@@ -25,5 +25,7 @@
         <activity android:name=".AddDespesaActivity"
             android:label="@string/app_name" />
     </application>
+    
+    <data android:mimeType="vnd.android.cursor.dir/vnd.pmp.smsmessage" />
 
 </manifest>

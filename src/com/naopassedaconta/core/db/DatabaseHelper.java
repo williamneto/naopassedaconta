@@ -3,12 +3,13 @@ package com.naopassedaconta.core.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.naopassedaconta.despesas.dao.DespesaDAO;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-	private static final String DATABASE_NAME = "naopassedaconte.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "naopassedaconta.db";
+	private static final int DATABASE_VERSION = 2;
 	private static final String TAG = "dbHelper";
 	private static DatabaseHelper _instance;
 	private Context context;
@@ -20,12 +21,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db){
-		//DespesaDAO.getInstance().createTable(db);
+		new DespesaDAO().createTable(db);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
+		if (oldVersion != DATABASE_VERSION){
+			Log.w(TAG, "Destroying old data during updgrade");
+			new DespesaDAO().dropTable(db);
+			
+			onCreate(db);
+		}
 		
 	}
 	public static synchronized DatabaseHelper initInstance(Context context) {

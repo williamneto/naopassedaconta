@@ -8,11 +8,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.naopassedaconta.core.db.DatabaseHelper;
+
 public class MainActivity extends Activity {
+
+	DatabaseHelper dbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dbHelper = DatabaseHelper.initInstance(this);
 		setContentView(R.layout.activity_main);
 	}
 

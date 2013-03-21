@@ -1,8 +1,10 @@
 package com.naopassedaconta.despesas.dao;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.naopassedaconta.core.db.BaseDAO;
+import com.naopassedaconta.despesas.models.Despesa;
 
 public class DespesaDAO extends BaseDAO {
 	public static String TABLE_NAME = "despesa";
@@ -10,8 +12,8 @@ public class DespesaDAO extends BaseDAO {
 	
 	public static interface Columns {
 		String ID = "id";
+		String DESCRICAO = "descricao";
 		String VALOR = "valor";
-		String DATA = "data";
 	}
 	
 	public DespesaDAO() {
@@ -27,14 +29,28 @@ public class DespesaDAO extends BaseDAO {
 
 	@Override
 	public void createTable(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
+		db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
+				+ Columns.ID + " INTEGER PRIMARY KEY,"
+				+ Columns.DESCRICAO + " TEXT NOT NULL, "
+				+ Columns.VALOR + " INTEGER NOT NULL)");
 		
 	}
 
 	@Override
 	public void dropTable(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		
+	}
+	
+	public void insert(Despesa d){
+		SQLiteDatabase db = getWritableDatabase();
+		ContentValues vals = new ContentValues();
+		
+		vals.put(Columns.ID, d.id);
+		vals.put(Columns.DESCRICAO, d.descricao);
+		vals.put(Columns.VALOR, d.valor);
+		
+		db.insert(TABLE_NAME, null, vals);
 	}
 
 }
