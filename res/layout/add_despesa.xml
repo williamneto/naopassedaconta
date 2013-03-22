@@ -25,7 +25,14 @@
         android:hint="Valor"
         android:inputType="number"
         android:id="@+id/valor" />
-    <Button android:layout_below="@+id/valor"
+
+    <TextView android:layout_below="@+id/valor"
+        android:id="@+id/text2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10pt" />
+
+    <Button android:layout_below="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Adicionar"
