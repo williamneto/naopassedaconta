@@ -1,6 +1,10 @@
 package com.naopassedaconta.despesas.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.naopassedaconta.core.db.BaseDAO;
@@ -51,6 +55,31 @@ public class DespesaDAO extends BaseDAO {
 		vals.put(Columns.VALOR, d.valor);
 		
 		db.insert(TABLE_NAME, null, vals);
+	}
+	
+	public List<Despesa> getDespesas(){
+		Cursor c = getReadableDatabase().query(
+				TABLE_NAME, null, null, null, null, null, null);
+		
+		return fillList(c);
+		
+	}
+	
+	private static ArrayList<Despesa> fillList(Cursor c){
+		ArrayList<Despesa> despesas = new ArrayList<Despesa>();
+		
+		c.moveToFirst();
+		while (!c.isAfterLast()){
+			Despesa d = new Despesa();
+			d.id = c.getString(c.getColumnIndex(Columns.ID));
+			d.descricao = c.getString(c.getColumnIndex(Columns.DESCRICAO));
+			d.valor = c.getString(c.getColumnIndex(Columns.VALOR));
+			
+			despesas.add(d);
+			c.moveToNext();
+		}
+		c.close();
+		return despesas;
 	}
 
 }

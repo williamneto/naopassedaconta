@@ -8,8 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
     
+    <TableLayout android:id="@+id/tableLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">        
+    </TableLayout>
+    
     <Button android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_below="@+id/tableLayout"
         android:id="@+id/btn_add_despesa"
         android:text="Adiciona despesa"/>
 

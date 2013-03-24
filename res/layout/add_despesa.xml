@@ -23,7 +23,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Valor"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:id="@+id/valor" />
 
     <TextView android:layout_below="@+id/valor"
